@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-# from decouple import config
+from decouple import config
 import environ
 import os
 
@@ -36,7 +36,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 LOGIN_REDIRECT_URL = 'dashboard'
 # Application definition
@@ -99,20 +99,16 @@ WSGI_APPLICATION = "carapp.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": config('ENGINE'),
-#         "NAME": config('NAME'),
-#         "USER": config('USER'),
-#         "PASSWORD": config('PASSWORD'),
-#         "HOST": 'localhost',
-#     }
-# }
-import dj_database_url
-
 DATABASES = {
-    "default": dj_database_url.parse(env('DATABASE_URL'))
+    "default": {
+        "ENGINE": config('ENGINE'),
+        "NAME": config('NAME'),
+        "USER": config('USER'),
+        "PASSWORD": config('PASSWORD'),
+        "HOST": 'localhost',
+    }
 }
+
 
 
 # Password validation
