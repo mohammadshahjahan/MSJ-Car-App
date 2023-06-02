@@ -36,7 +36,8 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 LOGIN_REDIRECT_URL = 'dashboard'
 # Application definition
@@ -99,16 +100,19 @@ WSGI_APPLICATION = "carapp.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": config('ENGINE'),
+#         "NAME": config('NAME'),
+#         "USER": config('USER'),
+#         "PASSWORD": config('PASSWORD'),
+#         "HOST": 'localhost',
+#     }
+# }
+import dj_database_url
 DATABASES = {
-    "default": {
-        "ENGINE": config('ENGINE'),
-        "NAME": config('NAME'),
-        "USER": config('USER'),
-        "PASSWORD": config('PASSWORD'),
-        "HOST": 'localhost',
-    }
+    'default' : dj_database_url.parse(env('DATABASE_URL'))
 }
-
 
 
 # Password validation
